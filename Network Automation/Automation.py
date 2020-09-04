@@ -6,7 +6,7 @@ os.system('clear')
 
 
 #login banner
-print('CISCO AUTOMATION\nCREATE BY LNF LINFIQ 04\n\n\nhelp - show command\n')
+print('NETWORK AUTOMATION\nCREATE BY LNF LINFIQ 04\n\n\nhelp - show command\n')
 
 while True:
 
