@@ -8,7 +8,7 @@ os.system('clear')
 
 
 #login banner
-print('NETWORK AUTOMATION\nCREATE BY LNF LINFIQ 04\n\n\nver0.0.1(alpha)\nhelp - show command\n')
+print('NETWORK AUTOMATION\nCREATE BY LNF LINFIQ 04\n\n\nver0.0.0(alpha)\nhelp - show command\n')
 
 while True:
 
@@ -67,10 +67,36 @@ while True:
                     elif(router_command == 'help'):
                         print('\n')
                         print('default - configure basic command for mikrotik access internet')
+                        print('forward - configure port forwarding for change destination port')
+                        print('limit - configure bandwidth limitation per user')
                         print('clear - clear screen')
                         print('end - back')
                         print('help - show command')
                         print('\n')
+
+                    elif(router_command == 'forward'):
+                        destination_address = input('set destination address\n>>> ')
+                        source_port = input('set source port\n>>> ')
+                        destination_port = input('set destination port\n>>> ')
+                        protocol = input('set protocol type\n>>> ')
+                        internet_access = input('set interface to destination interface\n>>> ')
+
+                        Set_Port_Forwarding = Router.Mikrotik.Set_Port_Forwarding(destination_address, source_port, destination_port, protocol, internet_access)
+
+                        stdin, stdout, stderr = Router_API.exec_command(Set_Port_Forwarding)
+
+                        stdout.readlines()
+
+                    elif(router_command == 'limit'):
+                        name_queue = input('set name queue\n>>> ')
+                        address = input('set address device\n>>> ')
+                        download_max = input('set max download byte example 256k\n>>> ')
+                        upload_max = input('set max upload byte example 256k\n>>> ')
+
+                        Set_Simple_Queue = Router.Mikrotik.Set_Simple_Queue(name_queue, address, upload_max, download_max)
+
+                        stdin, stdout, stderr = Router_API.exec_command(Set_Simple_Queue)
+                        stdout.readlines()
 
                     elif(router_command == 'default'):
 
@@ -99,7 +125,7 @@ while True:
 
                             stdin, stdout, stderr = Router_API.exec_command(Basic_Setting_Static_Router)
 
-                            Router_Command_Call = stdout.readlines()
+                            stdout.readlines()
 
                         elif(choice_next == 'y'):
                             continue

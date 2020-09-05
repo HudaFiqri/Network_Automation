@@ -1,19 +1,22 @@
-class test1():
-    """
-    lorem ipsum test 1
-    """
+'''
+simple:
+- basic internet configure
+- limit upload download device
+- port forwarding
 
-    def function1(self, value1, value2):
-        '''
-        function1 testing value
-        '''
-        self.value1 = value1
-        self.value2 = value2
-        object_value = value1 + value2
-        return object_value
+advance
+- bridge
+- routing
+- system
+- upgrade and downgrade
+- backup and restore system
+'''
 
-import_class = test1()
+import Router
 
-output = import_class.function1(value1=1, value2=5)
+name_queue = input('set name queue\n>>> ')
+address = input('set address device\n>>> ')
+download_max = input('set max download byte example 256k\n>>> ')
+upload_max = input('set max upload byte example 256k\n>>> ')
 
-print(output)
+Set_Simple_Queue = Router.Mikrotik.Set_Simple_Queue(name_queue, address, upload_max, download_max)

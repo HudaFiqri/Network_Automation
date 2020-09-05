@@ -32,3 +32,19 @@ def Set_Static_Route(address=None, gateway=None):
     '''
     static_route =('ip route add dst-address='+ address+ ' ' + 'gateway='+ gateway)
     return static_route
+
+#set simple queue
+def Set_Simple_Queue(name=None, address=None, upload=None, download=None):
+    '''
+    if you have a device connection that must be shared with the internet speed
+    '''
+    Simple_Queue = 'queue simple add name='+ name +' target='+ address +' max-limit='+ upload + '/' + download
+    return Simple_Queue
+
+#set port forwarding
+def Set_Port_Forwarding(address=None, from_port=None, to_port=None, protocol=None, internet_interface=None):
+    '''
+    port forwarding is used to change the destination of the port to be addressed
+    '''
+    Port_Forwarding = 'ip firewall nat add chain=dstnat action=dst-nat to-addresses='+ address +' to-ports='+ to_port +' protocol='+ protocol +' in-interface='+ internet_interface +' dst-port='+ from_port
+    return Port_Forwarding
