@@ -61,20 +61,18 @@ while True:
                     print('\n')
                     router_command = input('LNF(command-Mikrotik)> ')
 
-                    
-
                     if(router_command == 'end'):
                         break
 
                     elif(router_command == 'help'):
-                        print('mikrotik')
-                        print('basic_command - configure basic command for mikrotik access internet')
+                        print('\n')
+                        print('default - configure basic command for mikrotik access internet')
                         print('clear - clear screen')
                         print('end - back')
                         print('help - show command')
                         print('\n')
 
-                    elif(router_command == 'basic_command'):
+                    elif(router_command == 'default'):
 
                         os.system('clear')
 
