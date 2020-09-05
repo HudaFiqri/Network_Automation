@@ -1,2 +1,2 @@
 # Network-Automation
-automticaly configure for router and switch
+automaticaly configure for router and switch
