@@ -1,11 +1,9 @@
 #module
 import os
 import paramiko
+import netmiko
 import getpass
 import Router
-
-os.system('clear')
-
 
 #login banner
 print('NETWORK AUTOMATION\nCREATE BY LNF LINFIQ 04\n\n\nver0.1.1(beta)\nhelp - show command\n')
@@ -18,7 +16,6 @@ while True:
     #input command
     if(input_command == 'help'):
         print('\n')
-        print('clear - clear screen')
         print('exit - exit program')
         print('help - show command')
         print('ssh - connect devices using SSH')
@@ -26,8 +23,6 @@ while True:
 
     #ssh command
     elif(input_command == 'ssh'):
-
-        os.system('clear')
         
         while True:
 
@@ -36,11 +31,18 @@ while True:
 
             if(ssh_command == 'help'):
                 print('\n')
+                print('cisco - connecting with the type of the Cisco brand')
                 print('back - back to menu')
-                print('clear - clear screen')
                 print('help - show command')
                 print('mikrotik - connecting with the type of the Mikrotik brand')
                 print('\n')
+
+            #cisco brand
+            elif(ssh_command == 'cisco'):
+                hostname = input('hostname address\n>>> ')
+                port = input('port\n>>> ')
+                username = input('username\n>>> ')
+                password = getpass.getpass('password\n>>> ')
 
             #mikrotik brand
             elif(ssh_command == 'mikrotik'):
@@ -53,10 +55,6 @@ while True:
                 Router_API = paramiko.SSHClient()
                 Router_API.set_missing_host_key_policy(paramiko.AutoAddPolicy())
                 Router_API.connect(hostname, port, username, password)
-                #stdin, stdout, stderr = Router_API.exec_command(router_command)
-                #Router_run_command = stdout.readlines()
-                #print(Router_run_command)
-
                 while True:
                     print('\n')
                     router_command = input('LNF(command-Mikrotik)> ')
@@ -69,7 +67,6 @@ while True:
                         print('default - configure basic command for mikrotik access internet')
                         print('forward - configure port forwarding for change destination port')
                         print('limit - configure bandwidth limitation per user')
-                        print('clear - clear screen')
                         print('end - back')
                         print('help - show command')
                         print('\n')
@@ -99,8 +96,6 @@ while True:
                         stdout.readlines()
 
                     elif(router_command == 'default'):
-
-                        os.system('clear')
 
                         #command for setting
                         internet_port = input('set internet port on your router example ether1\n>>> ')
@@ -136,9 +131,6 @@ while True:
                     else:
                         print('command error')
 
-            elif(ssh_command == 'clear'):
-                os.system('clear')
-
             elif(ssh_command == 'back'):
                 break
 
@@ -146,10 +138,6 @@ while True:
                 print('\n')
                 print('command error')
                 print('\n')
-
-
-    elif(input_command == 'clear'):
-        os.system('clear')
 
     elif(input_command == 'exit'):
         exit()
