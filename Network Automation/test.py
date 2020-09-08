@@ -1,22 +1,31 @@
+import paramiko
+from netmiko import ConnectHandler
+
+Router_conn = paramiko.SSHClient()
+
+Router_conn.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+Router_conn.connect(hostname='198.18.0.40', port='22', username='user1', password='user1')
+
+stdin, stdout, stderr = Router_conn.exec_command('ip add pri')
+
+out = stdout.readlines()
+
+print(out)
+
+#netmiko
+
+
 '''
-simple:
-- basic internet configure
-- limit upload download device
-- port forwarding
-
-advance
-- bridge
-- routing
-- system
-- upgrade and downgrade
-- backup and restore system
+Router = {
+    'device_type': 'mikrotik_routeros',
+    'host': '198.18.0.40', 
+    'username': 'user1', 
+    'password':'user1',
+}
 '''
 
-import Router
+connect = ConnectHandler(device_type='mikrotik_routeros', host='198.18.0.40', username='user1', password='user1')
 
-name_queue = input('set name queue\n>>> ')
-address = input('set address device\n>>> ')
-download_max = input('set max download byte example 256k\n>>> ')
-upload_max = input('set max upload byte example 256k\n>>> ')
+output = connect.send_config_set("sys iden set name='RTR_CORE_LINFIQ'")
 
-Set_Simple_Queue = Router.Mikrotik.Set_Simple_Queue(name_queue, address, upload_max, download_max)
+print(output)
