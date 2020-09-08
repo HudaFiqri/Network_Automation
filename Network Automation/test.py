@@ -1,31 +1,16 @@
-import paramiko
-from netmiko import ConnectHandler
+from netmiko import mikrotik
 
-Router_conn = paramiko.SSHClient()
+host = '192.168.43.16'
+user = 'user1'
+passw = 'user1'
+command = input('>>> ')
 
-Router_conn.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-Router_conn.connect(hostname='198.18.0.40', port='22', username='user1', password='user1')
+api = mikrotik.MikrotikRouterOsSSH(
+    host='192.168.43.16',
+    username='user1',
+    password='user1',
+    device_type='mikrotik',
+    encoding=ascii
+)
 
-stdin, stdout, stderr = Router_conn.exec_command('ip add pri')
-
-out = stdout.readlines()
-
-print(out)
-
-#netmiko
-
-
-'''
-Router = {
-    'device_type': 'mikrotik_routeros',
-    'host': '198.18.0.40', 
-    'username': 'user1', 
-    'password':'user1',
-}
-'''
-
-connect = ConnectHandler(device_type='mikrotik_routeros', host='192.168.1.1', username='user1', password='user1')
-
-output = connect.send_config_set("sys iden set name='RTR_CORE_LINFIQ'")
-
-print(output)
+api.send_command('ip address print')
