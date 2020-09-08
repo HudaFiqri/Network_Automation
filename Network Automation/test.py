@@ -24,7 +24,7 @@ Router = {
 }
 '''
 
-connect = ConnectHandler(device_type='mikrotik_routeros', host='198.18.0.40', username='user1', password='user1')
+connect = ConnectHandler(device_type='mikrotik_routeros', host='192.168.1.1', username='user1', password='user1')
 
 output = connect.send_config_set("sys iden set name='RTR_CORE_LINFIQ'")
 
