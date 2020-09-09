@@ -1,16 +1,17 @@
-from netmiko import mikrotik
+import netmiko
 
-host = '192.168.43.16'
-user = 'user1'
-passw = 'user1'
-command = input('>>> ')
 
-api = mikrotik.MikrotikRouterOsSSH(
-    host='192.168.43.16',
-    username='user1',
-    password='user1',
-    device_type='mikrotik',
-    encoding=ascii
-)
+'''
+api = {
+    'device_type': 'cisco_ios',
+    'host': '173.10.3.1',
+    'username': 'cperoot',
+    'password': 'nasional123'
+}
+'''
 
-api.send_command('ip address print')
+connect = netmiko.cisco.CiscoIosBase(ip='173.10.3.1', username='cperoot', password='nasional123')
+
+output = connect.send_command('show users')
+
+print(output)
