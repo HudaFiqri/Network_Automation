@@ -1,5 +1,5 @@
 #set basic configure for router can access internet
-def Set_Basic_Access(internet_port=None):
+def Set_Basic_Access(internet_port=""):
     '''
     set port for internet access and automation dhcp client
     '''
@@ -7,7 +7,7 @@ def Set_Basic_Access(internet_port=None):
     return access_internet
     
 #set router hostname
-def Set_Hostname(name=None):
+def Set_Hostname(name=""):
     '''
     set name for change your mikrotik hostname
     '''
@@ -15,7 +15,7 @@ def Set_Hostname(name=None):
     return Set_Hostname
 
 #set local username
-def Set_User(name=None, password=None,group=None):
+def Set_User(name="", password="",group=""):
     '''
     basic configuration for local users on mikrotik.
     users on Mikrotik use several types, namely: full (full access), 
@@ -25,7 +25,7 @@ def Set_User(name=None, password=None,group=None):
     return user_name
 
 #set default routing static
-def Set_Static_Route(address=None, gateway=None):
+def Set_Static_Route(address="", gateway=""):
     '''
     for address must using network and prefix example 192.168.0.0/24 and gateway ip host
     example 192.168.1.1
@@ -34,7 +34,7 @@ def Set_Static_Route(address=None, gateway=None):
     return static_route
 
 #set simple queue
-def Set_Simple_Queue(name=None, address=None, upload=None, download=None):
+def Set_Simple_Queue(name="", address="", upload="", download=""):
     '''
     if you have a device connection that must be shared with the internet speed
     '''
@@ -42,7 +42,7 @@ def Set_Simple_Queue(name=None, address=None, upload=None, download=None):
     return Simple_Queue
 
 #set port forwarding
-def Set_Port_Forwarding(address=None, from_port=None, to_port=None, protocol=None, internet_interface=None):
+def Set_Port_Forwarding(address="", from_port="", to_port="", protocol="", internet_interface=""):
     '''
     port forwarding is used to change the destination of the port to be addressed
     '''

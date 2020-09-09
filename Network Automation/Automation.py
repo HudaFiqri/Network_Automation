@@ -6,7 +6,7 @@ import getpass
 import Router
 
 #login banner
-print('NETWORK AUTOMATION\nCREATE BY LNF LINFIQ 04\n\n\nver0.1.1(beta)\nhelp - show command\n')
+print('NETWORK AUTOMATION\nCREATE BY LNF LINFIQ 04\n\n\nver0.1.1(alpha)\nhelp - show command\n')
 
 while True:
 
