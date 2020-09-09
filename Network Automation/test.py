@@ -1,7 +1,7 @@
 import netmiko
 
 #connect module
-connect = netmiko.cisco.CiscoIosBase(ip='173.10.3.1', username='cperoot', password='nasional123', secret='nasional123')
+connect = netmiko.cisco.CiscoIosBase(ip='192.168.1.1', username='user', password='password', secret='password to priviledge')
 connect.enable()
 
 #configure module
