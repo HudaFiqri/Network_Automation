@@ -24,23 +24,30 @@ def Set_DHCP_Server(name="", network="", gateway="", dns=""):
     return DHCP_Server
 
 #configure NAT to access internet
-def Set_Basic_Access(WAN_interface="", LAN_interface=""):
-    """
-    configure this for client can access internet
-    """
-    Basic_Configure = Set_Basic_Access(
-        "ip access-list extended CLIENT"+
-        "\npermit ip any any"+
-        "\nexit"+
-        "\ninterface "+ WAN_interface +
-        "\ninterface "+ LAN_interface +
-        "\nip nat inside source list CLIENT interface"+ WAN_interface +"overload"
+def Set_Basic_Access(internet_port="", local_port=""):
+    '''
+    set basic configure for client can connect to internet
+    '''
+    Set_Access =(
+        "interface "+ internet_port +
+        "\nip nat out" +
+        "\nexit"
+        "\ninterface "+ local_port +
+        "\nip nat in" +
+        "\nexit" +
+        "\nip access-list extended CLIENT" +
+        "\npermit ip any any" +
+        "\nexit"
+        "\nip nat inside source list CLIENT interface "+ internet_port +" overload"
     )
-    return Basic_Configure
+    return Set_Access
 
-WAN = 'gigabyte 0/0'
-LAN = 'gigabyte 0/1'
-
-
-output = Set_Basic_Access(WAN, LAN)
-print(output)
+#set default routing static
+def Set_Static_Route(gateway=""):
+    """
+    configure static route
+    """
+    Static_Route = (
+        "ip route 0.0.0.0 0.0.0.0 "+ gateway
+    )
+    return Static_Route
