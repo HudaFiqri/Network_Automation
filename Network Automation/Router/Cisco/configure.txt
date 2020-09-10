@@ -7,6 +7,7 @@ ip dhcp pool CLIENT
 !
 interface GigabitEthernet0/0
  ip address dhcp
+ rate-limit input 856000 858993 859993 conform-action transmit exceed-action drop
  no shutdown
  ip nat out
 !

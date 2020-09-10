@@ -1,3 +1,9 @@
+import netmiko
+
+def __init__():
+    comm = 'test1'
+    return comm
+
 #set client interface
 def Set_Interface_Client(interface="", address=""):
     """
@@ -18,6 +24,7 @@ def Set_DHCP_Server(name="", network="", gateway="", dns=""):
     DHCP_Server = (
         "ip dhcp pool "+ name +
         "\ndefault-router "+ gateway +
+        "\nnetwork "+ network+
         "\ndns "+ dns+
         "\nexit\n"
     )
@@ -51,3 +58,5 @@ def Set_Static_Route(gateway=""):
         "ip route 0.0.0.0 0.0.0.0 "+ gateway
     )
     return Static_Route
+
+print(__init__)
