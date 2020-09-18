@@ -6,7 +6,7 @@ import getpass
 import Router
 
 #login banner
-print('NETWORK AUTOMATION\nCREATE BY LNF LINFIQ 04\n\n\nver0.1.1(alpha)\nhelp - show command\n')
+print('NETWORK AUTOMATION\nCREATE BY LNF LINFIQ 04\n\n\nver0.2.1\nhelp - show command\n')
 
 while True:
 
@@ -42,7 +42,55 @@ while True:
                 hostname = input('hostname address\n>>> ')
                 port = input('port\n>>> ')
                 username = input('username\n>>> ')
-                password = getpass.getpass('password\n>>> ')
+                password = input('password\n>>> ')
+                secret = input('insert secret your cisco device\n>>> ')
+
+                #connect module
+                Router_API = netmiko.cisco.CiscoIosBase(ip=hostname, username=username, password=password, secret=secret)
+                Router_API.enable()
+                while True:
+                    router_command = input('LNF(command-Cisco)> ')
+
+                    if(router_command == "help"):
+                        print('\n')
+                        print('help - show command')
+                        print('exit - stop connection')
+                        print('route - set static route for router to access network')
+                        print('internet - set nat so that clients can access the internets')
+                        print('dhcp - set dhcp server so that clients get automatic ip address')
+                        print('\n')
+
+                    elif(router_command == 'dhcp'):
+
+                        #command for setting
+                        Pool_Name = input("set pool name\n>>> ")
+                        network_address = input("set network address and subnet example[192.168.0.0 255.255.255.0]\n>>> ")
+                        gateway_address = input('set gateway address\n>>> ')
+                        dns_address = input('set dns address\n>>> ')
+
+                        #setting module
+                        Set_DHCP_Server = Router.Cisco.Set_DHCP_Server(name="",network="", gateway="", dns="")
+                        Set_DHCP = Router_API.send_config_set(Set_DHCP_Server)
+                        print(Set_DHCP)
+
+                    elif(router_command == 'internet'):
+                        Set_Internet_Port = input("enter your port of ethernet\n>>> ")
+                        Set_Local_Port = input("enter your port of local connection\n>>> ")
+                        Set_Internet_Access = Router.Cisco.Set_Basic_Access(internet_port=Set_Internet_Port, local_port=Set_Local_Port)
+                        Set_Internet_Output = Router_API.send_config_set(Set_Internet_Access)
+                        print(Set_Internet_Output)
+
+                    elif(router_command == "route"):
+                        Router_Gateway = input('gateway\n>>> ')
+                        Static = Router.Cisco.Set_Static_Route(gateway=Router_Gateway)
+                        output = Router_API.send_config_set(Static)
+                        print(output)
+
+                    elif(router_command == "exit"):
+                        break
+
+                    else:
+                        print("\ncommand error\n")
 
             #mikrotik brand
             elif(ssh_command == 'mikrotik'):
