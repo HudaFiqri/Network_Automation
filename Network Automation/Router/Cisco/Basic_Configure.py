@@ -1,9 +1,3 @@
-import netmiko
-
-def __init__():
-    comm = 'test1'
-    return comm
-
 #set client interface
 def Set_Interface_Client(interface="", address=""):
     """
