@@ -52,5 +52,3 @@ def Set_Static_Route(gateway=""):
         "ip route 0.0.0.0 0.0.0.0 "+ gateway
     )
     return Static_Route
-
-print(__init__)
